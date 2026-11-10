@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GateRouteImport } from './routes/gate'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SourcesRouteImport } from './routes/sources'
+import { Route as WaterRouteImport } from './routes/water'
+import { Route as ApiPublicAckCommandRouteImport } from './routes/api/public/ack-command'
+import { Route as ApiPublicIngestReadingRouteImport } from './routes/api/public/ingest-reading'
+import { Route as ApiPublicPendingCommandRouteImport } from './routes/api/public/pending-command'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GateRoute = GateRouteImport.update({
+  id: '/gate',
+  path: '/gate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesRoute = SourcesRouteImport.update({
+  id: '/sources',
+  path: '/sources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WaterRoute = WaterRouteImport.update({
+  id: '/water',
+  path: '/water',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAckCommandRoute = ApiPublicAckCommandRouteImport.update({
+  id: '/api/public/ack-command',
+  path: '/api/public/ack-command',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicIngestReadingRoute = ApiPublicIngestReadingRouteImport.update({
+  id: '/api/public/ingest-reading',
+  path: '/api/public/ingest-reading',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPendingCommandRoute = ApiPublicPendingCommandRouteImport.update({
+  id: '/api/public/pending-command',
+  path: '/api/public/pending-command',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/gate': typeof GateRoute
+  '/history': typeof HistoryRoute
+  '/settings': typeof SettingsRoute
+  '/sources': typeof SourcesRoute
+  '/water': typeof WaterRoute
+  '/api/public/ack-command': typeof ApiPublicAckCommandRoute
+  '/api/public/ingest-reading': typeof ApiPublicIngestReadingRoute
+  '/api/public/pending-command': typeof ApiPublicPendingCommandRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/gate': typeof GateRoute
+  '/history': typeof HistoryRoute
+  '/settings': typeof SettingsRoute
+  '/sources': typeof SourcesRoute
+  '/water': typeof WaterRoute
+  '/api/public/ack-command': typeof ApiPublicAckCommandRoute
+  '/api/public/ingest-reading': typeof ApiPublicIngestReadingRoute
+  '/api/public/pending-command': typeof ApiPublicPendingCommandRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/gate': typeof GateRoute
+  '/history': typeof HistoryRoute
+  '/settings': typeof SettingsRoute
+  '/sources': typeof SourcesRoute
+  '/water': typeof WaterRoute
+  '/api/public/ack-command': typeof ApiPublicAckCommandRoute
+  '/api/public/ingest-reading': typeof ApiPublicIngestReadingRoute
+  '/api/public/pending-command': typeof ApiPublicPendingCommandRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/gate'
+    | '/history'
+    | '/settings'
+    | '/sources'
+    | '/water'
+    | '/api/public/ack-command'
+    | '/api/public/ingest-reading'
+    | '/api/public/pending-command'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/gate'
+    | '/history'
+    | '/settings'
+    | '/sources'
+    | '/water'
+    | '/api/public/ack-command'
+    | '/api/public/ingest-reading'
+    | '/api/public/pending-command'
+  id:
+    | '__root__'
+    | '/'
+    | '/gate'
+    | '/history'
+    | '/settings'
+    | '/sources'
+    | '/water'
+    | '/api/public/ack-command'
+    | '/api/public/ingest-reading'
+    | '/api/public/pending-command'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GateRoute: typeof GateRoute
+  HistoryRoute: typeof HistoryRoute
+  SettingsRoute: typeof SettingsRoute
+  SourcesRoute: typeof SourcesRoute
+  WaterRoute: typeof WaterRoute
+  ApiPublicAckCommandRoute: typeof ApiPublicAckCommandRoute
+  ApiPublicIngestReadingRoute: typeof ApiPublicIngestReadingRoute
+  ApiPublicPendingCommandRoute: typeof ApiPublicPendingCommandRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gate': {
+      id: '/gate'
+      path: '/gate'
+      fullPath: '/gate'
+      preLoaderRoute: typeof GateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources': {
+      id: '/sources'
+      path: '/sources'
+      fullPath: '/sources'
+      preLoaderRoute: typeof SourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/water': {
+      id: '/water'
+      path: '/water'
+      fullPath: '/water'
+      preLoaderRoute: typeof WaterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/ack-command': {
+      id: '/api/public/ack-command'
+      path: '/api/public/ack-command'
+      fullPath: '/api/public/ack-command'
+      preLoaderRoute: typeof ApiPublicAckCommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/ingest-reading': {
+      id: '/api/public/ingest-reading'
+      path: '/api/public/ingest-reading'
+      fullPath: '/api/public/ingest-reading'
+      preLoaderRoute: typeof ApiPublicIngestReadingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/pending-command': {
+      id: '/api/public/pending-command'
+      path: '/api/public/pending-command'
+      fullPath: '/api/public/pending-command'
+      preLoaderRoute: typeof ApiPublicPendingCommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GateRoute: GateRoute,
+  HistoryRoute: HistoryRoute,
+  SettingsRoute: SettingsRoute,
+  SourcesRoute: SourcesRoute,
+  WaterRoute: WaterRoute,
+  ApiPublicAckCommandRoute: ApiPublicAckCommandRoute,
+  ApiPublicIngestReadingRoute: ApiPublicIngestReadingRoute,
+  ApiPublicPendingCommandRoute: ApiPublicPendingCommandRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
