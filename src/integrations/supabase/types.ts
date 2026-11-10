@@ -14,13 +14,284 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      data_sources: {
+        Row: {
+          last_synced_at: string | null
+          newest_observation_at: string | null
+          payload: Json
+          source_id: string
+        }
+        Insert: {
+          last_synced_at?: string | null
+          newest_observation_at?: string | null
+          payload?: Json
+          source_id: string
+        }
+        Update: {
+          last_synced_at?: string | null
+          newest_observation_at?: string | null
+          payload?: Json
+          source_id?: string
+        }
+        Relationships: []
+      }
+      gate_commands: {
+        Row: {
+          acknowledged_at: string | null
+          created_at: string
+          device_id: string | null
+          id: number
+          reason: string
+          sent_at: string | null
+          source: string
+          status: string
+          target_pct: number
+        }
+        Insert: {
+          acknowledged_at?: string | null
+          created_at?: string
+          device_id?: string | null
+          id?: never
+          reason?: string
+          sent_at?: string | null
+          source: string
+          status?: string
+          target_pct: number
+        }
+        Update: {
+          acknowledged_at?: string | null
+          created_at?: string
+          device_id?: string | null
+          id?: never
+          reason?: string
+          sent_at?: string | null
+          source?: string
+          status?: string
+          target_pct?: number
+        }
+        Relationships: []
+      }
+      gate_events: {
+        Row: {
+          created_at: string
+          ec: number | null
+          h_in: number | null
+          h_out: number | null
+          id: number
+          is_sample: boolean
+          reason: string
+          source: string
+          target_pct: number
+        }
+        Insert: {
+          created_at?: string
+          ec?: number | null
+          h_in?: number | null
+          h_out?: number | null
+          id?: never
+          is_sample?: boolean
+          reason?: string
+          source: string
+          target_pct: number
+        }
+        Update: {
+          created_at?: string
+          ec?: number | null
+          h_in?: number | null
+          h_out?: number | null
+          id?: never
+          is_sample?: boolean
+          reason?: string
+          source?: string
+          target_pct?: number
+        }
+        Relationships: []
+      }
+      gate_state: {
+        Row: {
+          alert: string | null
+          checks: Json
+          draining: boolean
+          engine_mode: string
+          engine_ran_at: string | null
+          engine_reason: string
+          engine_target: number
+          estop: boolean
+          id: number
+          mode: string
+          target_pct: number
+          updated_at: string
+        }
+        Insert: {
+          alert?: string | null
+          checks?: Json
+          draining?: boolean
+          engine_mode?: string
+          engine_ran_at?: string | null
+          engine_reason?: string
+          engine_target?: number
+          estop?: boolean
+          id?: number
+          mode?: string
+          target_pct?: number
+          updated_at?: string
+        }
+        Update: {
+          alert?: string | null
+          checks?: Json
+          draining?: boolean
+          engine_mode?: string
+          engine_ran_at?: string | null
+          engine_reason?: string
+          engine_target?: number
+          estop?: boolean
+          id?: number
+          mode?: string
+          target_pct?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      rain_observations: {
+        Row: {
+          id: number
+          is_sample: boolean
+          last24h_mm: number
+          last3h_mm: number
+          observed_at: string
+          rate_mm_h: number
+        }
+        Insert: {
+          id?: never
+          is_sample?: boolean
+          last24h_mm?: number
+          last3h_mm?: number
+          observed_at: string
+          rate_mm_h?: number
+        }
+        Update: {
+          id?: never
+          is_sample?: boolean
+          last24h_mm?: number
+          last3h_mm?: number
+          observed_at?: string
+          rate_mm_h?: number
+        }
+        Relationships: []
+      }
+      sensor_readings: {
+        Row: {
+          created_at: string
+          device_id: string
+          ec_polder: number | null
+          ec_river: number
+          gate_pct: number
+          h_in: number
+          h_out: number
+          id: number
+          is_sample: boolean
+          water_temp: number | null
+        }
+        Insert: {
+          created_at?: string
+          device_id?: string
+          ec_polder?: number | null
+          ec_river: number
+          gate_pct?: number
+          h_in: number
+          h_out: number
+          id?: never
+          is_sample?: boolean
+          water_temp?: number | null
+        }
+        Update: {
+          created_at?: string
+          device_id?: string
+          ec_polder?: number | null
+          ec_river?: number
+          gate_pct?: number
+          h_in?: number
+          h_out?: number
+          id?: never
+          is_sample?: boolean
+          water_temp?: number | null
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          area_name: string
+          danger_level: number
+          drain_start: number
+          drain_stop: number
+          id: number
+          latitude: number
+          longitude: number
+          min_head: number
+          rain_alert_3h: number
+          salinity_limit: number
+          simulator_enabled: boolean
+          updated_at: string
+        }
+        Insert: {
+          area_name?: string
+          danger_level?: number
+          drain_start?: number
+          drain_stop?: number
+          id?: number
+          latitude?: number
+          longitude?: number
+          min_head?: number
+          rain_alert_3h?: number
+          salinity_limit?: number
+          simulator_enabled?: boolean
+          updated_at?: string
+        }
+        Update: {
+          area_name?: string
+          danger_level?: number
+          drain_start?: number
+          drain_stop?: number
+          id?: number
+          latitude?: number
+          longitude?: number
+          min_head?: number
+          rain_alert_3h?: number
+          salinity_limit?: number
+          simulator_enabled?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      rain_bucketed: {
+        Args: { p_bucket_seconds: number; p_from: string; p_to: string }
+        Returns: {
+          bucket: string
+          max_rate: number
+          n: number
+          rain_mm: number
+        }[]
+      }
+      readings_bucketed: {
+        Args: { p_bucket_seconds: number; p_from: string; p_to: string }
+        Returns: {
+          bucket: string
+          ec_polder: number
+          ec_river: number
+          h_in: number
+          h_out: number
+          max_ec: number
+          max_gate_pct: number
+          max_h_in: number
+          max_h_out: number
+          n: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
