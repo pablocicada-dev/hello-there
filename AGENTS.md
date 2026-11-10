@@ -28,3 +28,12 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## DeltaGate-IoT project rules
+
+- Gate rules live in `src/lib/engine.ts` as pure functions shared by server, UI and tests (`src/lib/engine.test.ts`); change rules there, never inline in pages. Why: one source of truth for safety logic.
+- All database writes go through server functions (`src/lib/*.functions.ts`) or `/api/public/*` device routes using the service-role client; the browser only reads (anon SELECT policies) and subscribes to realtime. Why: no login yet, so the browser must not write directly.
+- ESP32 endpoints (`/api/public/ingest-reading`, `/pending-command`, `/ack-command`) check the `x-api-key` header against the `DEVICE_API_KEY` secret. Why: these URLs are public.
+- Every satellite source fetcher lives in `src/lib/sources/<source>.server.ts` and returns `SourceSyncResult`; `sync.server.ts` stores results in `data_sources`. Why: swapping mocks for real NASA Earthdata calls stays local to one file.
+- The simulator and the fail-safe heartbeat run from the `tick` server function, called every 10 s by open app tabs (deduplicated server-side). Why: the server runtime has no background timers.
+- Charts read bucketed data from the `readings_bucketed` / `rain_bucketed` SQL functions. Why: avoids the 1000-row API limit at 30-day ranges.
